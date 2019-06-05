@@ -210,7 +210,6 @@ function dumpBoard(board) {
 // didn't make thing any easier.
 function minmax(board: Board, depth: number, playerName: string) {
 
-
   console.log(`minmax ${depth} ${playerName}`);
   dumpBoard(board);
 
