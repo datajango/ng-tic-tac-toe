@@ -205,9 +205,10 @@ function dumpBoard(board) {
 
 }
 
-// I watched this youtube video on MinMax
+// I watched this youtube video on Min Max AI
 // https://www.youtube.com/watch?v=x_Je9i3aKNk
 // didn't make things any easier.
+
 function minmax(board: Board, depth: number, playerName: string) {
 
   console.log(`minmax ${depth} ${playerName}`);
@@ -239,31 +240,32 @@ function minmax(board: Board, depth: number, playerName: string) {
             y: y
           }
         });
+      }
+    }
 
-        if (playerName === 'Computer') {
 
-          let max = maxBy(values, (v) => {
-            return v.cost;
-          });
+    if (playerName === 'Computer') {
 
-          if (depth === 0) {
-            return max.cell;
-          } else {
-            return max.cost;
-          }
+      let max = maxBy(values, (v) => {
+        return v.cost;
+      });
 
-        } else if (playerName === 'Human') {
+      if (depth === 0) {
+        return max.cell;
+      } else {
+        return max.cost;
+      }
 
-          let min = minBy(values, (v) => {
-            return v.cost;
-          });
+    } else if (playerName === 'Human') {
 
-          if (depth === 0) {
-            return min.cell;
-          } else {
-            return min.cost;
-          }
-        }
+      let min = minBy(values, (v) => {
+        return v.cost;
+      });
+
+      if (depth === 0) {
+        return min.cell;
+      } else {
+        return min.cost;
       }
     }
 
@@ -303,12 +305,11 @@ function isGameOver(board: Board, isReal: boolean = false): string | boolean | n
     }
   }
 
-  // check diaganal
+  // check diaganals
   if ((board.spaces[0][0].playerName !== '') &&
     (board.spaces[0][0].playerName === board.spaces[1][1].playerName) &&
     (board.spaces[0][0].playerName === board.spaces[2][2].playerName)
   ) {
-
     return board.spaces[0][0].playerName;
   }
 
