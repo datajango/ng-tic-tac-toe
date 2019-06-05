@@ -1,16 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Player } from '../player';
 import { PlayerContext } from '@angular/core/src/render3/interfaces/player';
 import { GameService } from '../game.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-game-controls',
   templateUrl: './game-controls.component.html',
   styleUrls: ['./game-controls.component.scss']
 })
-export class GameControlsComponent implements OnInit {
+export class GameControlsComponent implements OnInit, OnDestroy {
 
-  constructor(private game: GameService) { }
+  message: string;
+  subscription: Subscription;
+
+  constructor(private game: GameService, private ref: ChangeDetectorRef) {
+    this.message = 'Ready';
+
+    // subscribe to home component messages
+    this.subscription = this.game.getGameState().subscribe(message => {
+      if (message) {
+        this.message = message.message;
+      } else {
+        this.message = 'Ready';
+      }
+    });
+  }
 
   ngOnInit() {
   }
@@ -19,11 +34,21 @@ export class GameControlsComponent implements OnInit {
     return this.game.getActivePlayer();
   }
 
-  getGameStatus() {
-    return this.game.getGameStatus();
-  }
+  // getGameState() {
+  //   return this.game.getGameState();
+  // }
 
   reset() {
     this.game.reset();
   }
+
+  // setGameState(): void {
+  //   this.ref.markForCheck();
+  // }
+
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    this.subscription.unsubscribe();
+  }
+
 }

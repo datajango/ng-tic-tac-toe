@@ -1,32 +1,24 @@
 import { Player } from './player';
-import { GameSpaceComponent } from './game-space/game-space.component';
 
 export class Space {
   row: number;
   column: number;
-  owner: Player;
-  component: GameSpaceComponent;
+  playerName: string;
+  symbol: string;
 
   constructor(row: number, column: number) {
     this.row = row;
     this.column = column;
-    this.owner = null;
+    this.playerName = '';
   }
 
   setPlayer(player: Player): void {
-    this.owner = player;
-    this.component.setPlayer(player);
-  }
-
-  getPlayer(): Player {
-    return this.owner;
+      this.playerName = player.playerName;
+      this.symbol = player.symbol;
   }
 
   reset(): void {
-    this.owner = null;
-    this.component.setPlayer(null);
-    this.component.victory = false;
+    this.playerName = '';
+    this.symbol = '';
   }
-
-
 }
