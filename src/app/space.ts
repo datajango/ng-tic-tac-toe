@@ -22,4 +22,11 @@ export class Space {
     return this.owner;
   }
 
+  reset(): void {
+    this.owner = null;
+    this.component.setPlayer(null);
+    this.component.victory = false;
+  }
+
+
 }

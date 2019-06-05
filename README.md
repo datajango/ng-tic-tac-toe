@@ -57,6 +57,13 @@
   ng generate class player
   ```
 
+1. Create a control panel
+
+  Allow user to reset the game.  Display victory and score.
+  ```
+  ng generate component game-controls --style=scss
+  ```
+
 
 ## Development server
 

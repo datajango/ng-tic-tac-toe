@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { GameService } from '../game.service';
 import { Player } from '../player';
 
@@ -13,11 +13,11 @@ export class GameSpaceComponent implements OnInit {
   @Input() row: number;
   @Input() column: number;
   @Input() player: Player;
+  @Input() victory: boolean;
 
-  constructor(private game: GameService) {
-
-
-   }
+  constructor(private game: GameService, private ref: ChangeDetectorRef) {
+    this.victory = false;
+  }
 
   ngOnInit() {
     console.log(`GameSpaceComponent ${this.row} ${this.column}`);
@@ -31,6 +31,7 @@ export class GameSpaceComponent implements OnInit {
 
   setPlayer(player: Player): void {
       this.player = player;
+      this.ref.markForCheck();
   }
 
   symbol(): string {
@@ -39,6 +40,5 @@ export class GameSpaceComponent implements OnInit {
     } else {
       return this.player.symbol;
     }
-
   }
 }
