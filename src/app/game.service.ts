@@ -207,7 +207,7 @@ function dumpBoard(board) {
 
 // I watched this youtube video on MinMax
 // https://www.youtube.com/watch?v=x_Je9i3aKNk
-// didn't make thing any easier.
+// didn't make things any easier.
 function minmax(board: Board, depth: number, playerName: string) {
 
   console.log(`minmax ${depth} ${playerName}`);
