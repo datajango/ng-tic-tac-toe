@@ -39,10 +39,7 @@ export class GameService {
       }
       this.components.push(row);
     }
-
   }
-
-
 
   update(): void {
     for (let x = 0; x < 3; x++) {
@@ -82,7 +79,6 @@ export class GameService {
     isGameOver(this.board, true);
 
     if (gameStatus === false) {
-
       // if (this.board.clicked(this.activePlayer, row, column)) {
         if (this.activePlayer.playerName === 'Human') {
           this.activePlayer = this.computerPlayer;
@@ -99,14 +95,13 @@ export class GameService {
               this.gameStateMessage = `${playerName} player wins`;
               this.sendGameState(this.gameStateMessage);
             } else {
-              this.gameStateMessage = 'In progess';
+              this.gameStateMessage = 'Tie';
               this.sendGameState(this.gameStateMessage);
             }
           }
         } else {
           this.activePlayer = this.humanPlayer;
-
-          this.gameStateMessage = 'In progess';
+          this.gameStateMessage = 'In progress';
           this.sendGameState(this.gameStateMessage);
         }
       // }
@@ -122,7 +117,7 @@ export class GameService {
   reset(): void {
     this.activePlayer = this.humanPlayer;
     this.board.reset();
-    this.gameStateMessage = 'In progess';
+    this.gameStateMessage = 'Ready';
     this.sendGameState(this.gameStateMessage);
     this.update();
   }
@@ -211,8 +206,8 @@ function dumpBoard(board) {
 
 function minmax(board: Board, depth: number, playerName: string) {
 
-  console.log(`minmax ${depth} ${playerName}`);
-  dumpBoard(board);
+  //console.log(`minmax ${depth} ${playerName}`);
+  //dumpBoard(board);
 
   const gameState: string | boolean | null = isGameOver(board);
 
@@ -231,7 +226,7 @@ function minmax(board: Board, depth: number, playerName: string) {
         boardClone.spaces[x][y].playerName = playerName;
 
         let value = minmax(boardClone, depth + 1, playerName === 'Human' ? 'Computer' : 'Human');
-        console.log(`${x} ${y} has a cost of ${value}`);
+        //console.log(`${x} ${y} has a cost of ${value}`);
 
         values.push({
           cost: value,
